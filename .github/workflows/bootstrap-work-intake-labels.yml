@@ -1,0 +1,50 @@
+name: Bootstrap work intake labels
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/bootstrap-work-intake-labels.yml"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure standard work-intake labels exist
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          current_labels="$(gh api "repos/$REPO/labels?per_page=100")"
+
+          ensure_label() {
+            local name="$1"
+            local color="$2"
+            local description="$3"
+
+            if echo "$current_labels" | jq -e --arg name "$name" '.[] | select(.name == $name)' >/dev/null; then
+              echo "Label exists: $name"
+            else
+              echo "Creating label: $name"
+              gh api --method POST "repos/$REPO/labels"                 -f name="$name"                 -f color="$color"                 -f description="$description" >/dev/null
+            fi
+          }
+
+          ensure_label "type:bug" "d73a4a" "Existing behavior is incorrect"
+          ensure_label "type:feature" "0e8a16" "Adds a new capability"
+          ensure_label "type:improvement" "1d76db" "Improves an existing capability"
+          ensure_label "type:technical-debt" "5319e7" "Internal architecture, maintainability, migration, or refactoring work"
+          ensure_label "type:research" "7057ff" "Investigation whose output is knowledge, a recommendation, prototype, or decision"
+          ensure_label "type:initiative" "fbca04" "Larger outcome decomposed into multiple issues"
+          ensure_label "type:task" "c5def5" "Concrete implementation task"
+          ensure_label "state:exploring" "fef2c0" "Captured but still needs product or technical definition"
+          ensure_label "state:defined" "c2e0c6" "Desired outcome, boundaries, and acceptance criteria are sufficiently clear"
+          ensure_label "state:planned" "bfd4f2" "Technical approach has been investigated and an implementation strategy exists"
+          ensure_label "state:agent-ready" "0e8a16" "Implementation plan is sufficiently detailed for the intended execution agent"
