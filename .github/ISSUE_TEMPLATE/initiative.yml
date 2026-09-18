@@ -1,0 +1,48 @@
+name: Initiative
+description: Capture a larger outcome expected to contain multiple work items.
+title: "[Initiative] "
+labels:
+  - "type:initiative"
+  - "state:exploring"
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What larger outcome are we trying to achieve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problem / Motivation
+      description: Why is this initiative worth pursuing?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Initial scope
+      description: Describe known workstreams without turning this into one giant implementation ticket.
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-goals
+      description: What is intentionally outside this initiative?
+
+  - type: textarea
+    id: success
+    attributes:
+      label: Success criteria
+      description: What outcome establishes that the initiative is complete?
+    validations:
+      required: true
+
+  - type: textarea
+    id: children
+    attributes:
+      label: Initial child work
+      description: List known child features, research items, technical-debt items, or tasks. Convert these into sub-issues as the initiative is refined.
