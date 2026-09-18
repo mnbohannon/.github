@@ -1,0 +1,42 @@
+name: Research / Spike
+description: Investigate a question before an implementation path is selected.
+title: "[Research] "
+labels:
+  - "type:research"
+  - "state:exploring"
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What are we trying to determine?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why is this decision or investigation needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Known technical, product, cost, compatibility, or timing constraints.
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output
+      description: What decision, recommendation, prototype, comparison, or findings should result?
+    validations:
+      required: true
+
+  - type: textarea
+    id: success
+    attributes:
+      label: Completion criteria
+      description: What evidence is sufficient to close this research item?
