@@ -1,0 +1,52 @@
+name: Bug
+description: Something in existing software is behaving incorrectly.
+title: "[Bug] "
+labels:
+  - "type:bug"
+  - "state:defined"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for incorrect existing behavior. Keep implementation details out unless they are necessary to describe the defect.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Steps, conditions, or environment needed to reproduce the problem.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable conditions that establish the defect is resolved.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Screenshots, logs, related issues, or other useful information.
