@@ -1,6 +1,7 @@
 name: Bootstrap work intake labels
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     paths:
@@ -33,7 +34,10 @@ jobs:
               echo "Label exists: $name"
             else
               echo "Creating label: $name"
-              gh api --method POST "repos/$REPO/labels"                 -f name="$name"                 -f color="$color"                 -f description="$description" >/dev/null
+              gh api --method POST "repos/$REPO/labels" \
+                -f name="$name" \
+                -f color="$color" \
+                -f description="$description" >/dev/null
             fi
           }
 
