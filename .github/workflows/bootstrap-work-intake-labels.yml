@@ -2,6 +2,11 @@ name: Bootstrap work intake labels
 
 on:
   workflow_call:
+    inputs:
+      runner:
+        description: The runner to use, as JSON (for example '"ubuntu-latest"'). A private caller passes its self-hosted runner.
+        type: string
+        default: '"ubuntu-latest"'
   workflow_dispatch:
   push:
     paths:
@@ -13,7 +18,8 @@ permissions:
 
 jobs:
   labels:
-    runs-on: ubuntu-latest
+    # A push or dispatch here has no inputs, so it runs on ubuntu-latest.
+    runs-on: ${{ fromJSON(inputs.runner || '"ubuntu-latest"') }}
     steps:
       - name: Ensure standard work-intake labels exist
         env:
